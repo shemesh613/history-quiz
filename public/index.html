@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>חידון היסטורי - העת החדשה</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="particles" id="particles"></div>
+
+  <!-- HOME -->
+  <div id="screen-home" class="screen active">
+    <div class="home-container">
+      <div class="logo">⚔️</div>
+      <h1 class="title">חידון היסטורי</h1>
+      <h2 class="subtitle">העת החדשה &bull; כיתה ז&apos;</h2>
+      <div class="card">
+        <div class="input-group">
+          <label for="playerName">שם השחקן</label>
+          <input type="text" id="playerName" placeholder="הכנס/י את שמך..." maxlength="20">
+        </div>
+        <div class="button-group">
+          <button class="btn btn-primary" id="createRoomBtn">🎮 צור חדר חדש</button>
+          <button class="btn btn-secondary" id="showJoinBtn">🔗 הצטרף לחדר קיים</button>
+        </div>
+        <div class="join-section hidden" id="joinSection">
+          <div class="input-group" style="margin-top:16px">
+            <label for="roomCode">קוד חדר</label>
+            <input type="text" id="roomCode" placeholder="הכנס קוד..." maxlength="5" style="letter-spacing:0.3em;text-transform:uppercase">
+          </div>
+          <button class="btn btn-primary" id="joinRoomBtn" style="width:100%">✅ הצטרף!</button>
+        </div>
+      </div>
+      <div class="error-message hidden" id="errorMsg"></div>
+    </div>
+  </div>
+
+  <!-- LOBBY -->
+  <div id="screen-lobby" class="screen">
+    <div class="lobby-container">
+      <h2>ממתין לשחקן נוסף...</h2>
+      <div class="room-code-display">
+        <div class="label">קוד החדר שלך:</div>
+        <div class="code" id="displayRoomCode">-----</div>
+        <button class="btn btn-small" id="copyCodeBtn">📋 העתק קוד</button>
+      </div>
+      <div class="spinner"></div>
+      <p class="hint">שלח/י את הקוד לחבר/ה שלך</p>
+    </div>
+  </div>
+
+  <!-- STARTING -->
+  <div id="screen-starting" class="screen">
+    <div class="starting-container">
+      <div class="players-display" id="playersDisplay"></div>
+      <h2>המשחק מתחיל!</h2>
+      <div class="countdown" id="countdown">3</div>
+    </div>
+  </div>
+
+  <!-- QUESTION -->
+  <div id="screen-question" class="screen">
+    <div class="question-container">
+      <div class="top-bar">
+        <div class="player-score">
+          <div class="player-name" id="score-name1">שחקן 1</div>
+          <div class="score-value" id="score-val1">0</div>
+        </div>
+        <div class="question-info">
+          <div class="question-number" id="questionNumber">שאלה 1/15</div>
+        </div>
+        <div class="player-score">
+          <div class="player-name" id="score-name2">שחקן 2</div>
+          <div class="score-value" id="score-val2">0</div>
+        </div>
+      </div>
+      <div class="timer-bar-container">
+        <div class="timer-bar" id="timerBar"></div>
+        <div class="timer-text" id="timerText">20</div>
+      </div>
+      <div class="question-card">
+        <div class="question-text" id="questionText">...</div>
+      </div>
+      <div class="answers-grid" id="answersGrid">
+        <button class="answer-btn" data-index="0"></button>
+        <button class="answer-btn" data-index="1"></button>
+        <button class="answer-btn" data-index="2"></button>
+        <button class="answer-btn" data-index="3"></button>
+      </div>
+      <div class="waiting-msg hidden" id="waitingMsg">ממתין לשחקן האחר<span class="dots">...</span></div>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div id="screen-result" class="screen">
+    <div class="result-container">
+      <h2 class="result-title" id="resultTitle">תוצאה</h2>
+      <div class="correct-answer-display">
+        <div class="label">התשובה הנכונה:</div>
+        <div class="correct-text" id="correctAnswerText"></div>
+      </div>
+      <div class="explanation" id="explanationText"></div>
+      <div class="players-results" id="playersResults"></div>
+      <div class="next-countdown">השאלה הבאה בעוד <span id="nextCountdown">5</span> שניות...</div>
+    </div>
+  </div>
+
+  <!-- GAME OVER -->
+  <div id="screen-gameover" class="screen">
+    <canvas id="confettiCanvas"></canvas>
+    <div class="gameover-container">
+      <div class="trophy" id="trophyIcon">🏆</div>
+      <h1 class="winner-title" id="winnerTitle">מנצח!</h1>
+      <div class="final-scores" id="finalScores"></div>
+      <button class="btn btn-primary" id="playAgainBtn">🔄 שחק שוב</button>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
